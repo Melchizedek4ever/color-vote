@@ -18,6 +18,8 @@
 (define-constant COLORS (list "F97316" "D1C0A8" "2563EB" "65A30D"))
 (define-constant MAX_SCORE u5)
 
+(define-constant ERR_NOT_FOUND (err u404))
+
 
 ;; data vars
 ;;
@@ -44,6 +46,16 @@
 ;; read only functions
 ;;
 (define-read-only (get-nb-of-voters) (var-get nb-of-voters))
+
+(define-read-only (get-color (id uint))
+  (ok {
+    id: id,
+    value: (unwrap! (element-at COLORS id) ERR_NOT_FOUND),
+    score: (unwrap! (element-at (var-get scores) id) ERR_NOT_FOUND),
+  })
+)
+
+(define-read-only (get-colors) (map get-color (list u0 u1 u2 u3)))
 ;; private functions
 ;;
 (define-private (is-valid (v uint) (valid bool)) (and valid (<= v MAX_SCORE)))
