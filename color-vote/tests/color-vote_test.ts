@@ -1,6 +1,7 @@
 
 import { Clarinet, Tx, Chain, Account, types } from 'https://deno.land/x/clarinet@v1.3.1/index.ts';
 import { assertEquals } from 'https://deno.land/std@0.170.0/testing/asserts.ts';
+
 const { uint, ascii } = types
 
 
@@ -46,9 +47,8 @@ Clarinet.test({
         Tx.contractCall('color-vote', 'get-color', [uint(1)], address),
       ])
   
-      // expectTuple will transform the clarity value into a JS object
-      const color = receipts[0].result.expectOk().expectTuple()
-      // assertEquals will compare our two objecs
+          const color = receipts[0].result.expectOk().expectTuple()
+    
       assertEquals(color, {score: uint(0), id: uint(1), value: ascii('D1C0A8') })
     },
   })
