@@ -56,7 +56,8 @@
 )
 
 (define-read-only (get-colors) (map get-color (list u0 u1 u2 u3)))
-(element-at (list "Hello" "World" u"!") u1)
+
+  (element-at (list "Hello" "World" u"!") u1)
 ;; private functions
 ;;
 (define-private (is-valid (v uint) (valid bool)) (and valid (<= v MAX_SCORE)))
